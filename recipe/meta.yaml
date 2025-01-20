@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/chime-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/chime-{{ version }}.tar.gz
   sha256: ba4af8934ec8bd9a89a340b4433b2e500097b979823386432be7128e0b201f0d
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
@@ -20,10 +20,10 @@ build:
 requirements:
   host:
     - pip
-    - poetry
-    - python >=3.6
+    - poetry-core >=1.0.0,<2.0.0
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - chime -h
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/MaxHalford/chime
