@@ -1,5 +1,5 @@
 {% set name = "chime" %}
-{% set version = "0.7.0" %}
+{% set version = "0.8.0" %}
 
 
 package:
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/chime-{{ version }}.tar.gz
-  sha256: ba4af8934ec8bd9a89a340b4433b2e500097b979823386432be7128e0b201f0d
+  sha256: fdba6a5e96302ace7b03108b2e63808fa3152a1cda132d558f27352776f83e4b
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
