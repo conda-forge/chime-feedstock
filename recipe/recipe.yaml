@@ -1,0 +1,54 @@
+schema_version: 1
+
+context:
+  name: chime
+  version: "0.8.0"
+  python_min: "3.11"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/chime-${{ version }}.tar.gz
+  sha256: fdba6a5e96302ace7b03108b2e63808fa3152a1cda132d558f27352776f83e4b
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - chime=chime:main
+
+requirements:
+  host:
+    - pip
+    - hatchling
+    - python ${{ python_min }}.*
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - chime
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - requirements:
+      run:
+        - python ${{ python_min }}
+    script:
+      - chime -h
+
+about:
+  summary: Python sound notifications made easy.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/MaxHalford/chime
+
+extra:
+  recipe-maintainers:
+    - thewchan
